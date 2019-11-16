@@ -8,10 +8,10 @@ const Container = styled.div`
 `
 
 const TypeButtons = props => {
-    const { handleClick, itemTypes } = props.data
+    const { handleClick, itemTypes, selectedItemType } = props.data
     return (
         <Container>
-            { itemTypes.map((type, index) =><Button key={index} data={{ handleClick, type }} />)}
+            { itemTypes.map((type, index) =><Button key={index} data={{ handleClick, type, selectedItemType }} />)}
         </Container>
     )
 }

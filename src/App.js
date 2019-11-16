@@ -37,7 +37,7 @@ class App extends Component {
     return axios.get(this.state.baseUrl + 'v0/topstories.json')
       .then(topData => {
         return axios.get(this.state.baseUrl + 'v0/jobstories.json')
-          .then(jobData => topData.concat(jobData))
+          .then(jobData => topData.data.concat(jobData.data))
       })
       .catch(error => console.log('topItemIds', error))
   }
@@ -86,15 +86,16 @@ class App extends Component {
   }
 
   render() {
-    const { itemTypes, selectedListing } = this.state
+    const { itemTypes, selectedListing, items, selectedItemType } = this.state
     const { toggleListingType, handleClick } = this
-    console.log(this.state)
+
     return (
       <div className="App">
         <Header data={{
           handleClick,
           itemTypes,
           toggleListingType,
+          selectedItemType,
           selectedListing
         }}/>
         <Feed items={ items } />

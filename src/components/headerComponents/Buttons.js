@@ -10,10 +10,10 @@ const ButtonsContainer = styled.div`
 `
 
 const Buttons = props => {
-    const { handleClick, itemTypes, toggleListingType, selectedListing } = props.data
+    const { handleClick, itemTypes, toggleListingType, selectedListing, selectedItemType } = props.data
     return (
         <ButtonsContainer>
-            <TypeButtons data={{ handleClick, itemTypes }} />
+            <TypeButtons data={{ handleClick, itemTypes, selectedItemType }} />
             <Toggle data={{ toggleListingType, selectedListing }} />
         </ButtonsContainer>
     )
