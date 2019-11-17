@@ -5,7 +5,7 @@ import FeedItem from './FeedItem'
 
 const ItemsContainer = props => {
     const { items, selectedItemType } = props.data
-    const filteredItems = items.filter(item => item.data && item.data.type === selectedItemType && item.data.by)
+    const filteredItems = items.filter(item => item.data && item.data.type === selectedItemType && item.data.by).slice(0, 100)
 
     const ItemsWrapper = styled.div`
         width: 100vw;
