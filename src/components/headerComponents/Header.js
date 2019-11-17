@@ -4,16 +4,16 @@ import styled from 'styled-components'
 import Buttons from './Buttons'
 import HeaderLogo from './HeaderLogo'
 
-const HeaderContainer = styled.div`
-    width: calc(100% - 10px);
-    padding: 10px 5px;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-`
-
 const Header = props => {
     const { handleClick, itemTypes, toggleListingType, selectedListing, selectedItemType } = props.data
+    const HeaderContainer = styled.div`
+        width: calc(100% - 10px);
+        padding: 10px 5px;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+    `
+
     return (
         <HeaderContainer>
             <HeaderLogo />

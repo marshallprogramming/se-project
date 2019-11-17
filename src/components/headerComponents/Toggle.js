@@ -1,19 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = styled.button`
-
-`
-
 const Toggle = props => {
     const { toggleListingType, selectedListing } = props.data
+
+    const Button = styled.button`
+        background: transparent;
+        border: 1px solid #f7f7f7;
+        border-radius: 2px;
+        height: 42px;
+        width: 128px;
+    `
+
+    const Span = styled.span`
+        color: #f7f7f7;
+        font-size: 18px;
+    `
+
     return (
         <div>
-            <button onClick={ toggleListingType } >
-                <span style={{  fontWeight: selectedListing === 'top' && 'bold' }}>Top</span>
-                <span> / </span>
-                <span style={{  fontWeight: selectedListing === 'recent' && 'bold' }}>Recent</span>
-            </button>
+            <Button onClick={ toggleListingType } >
+                <Span style={{  fontWeight: selectedListing === 'top' && 'bold' }}>Top</Span>
+                <Span> / </Span>
+                <Span style={{  fontWeight: selectedListing === 'recent' && 'bold' }}>Recent</Span>
+            </Button>
         </div>
     )
 }

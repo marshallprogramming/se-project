@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { createGlobalStyle } from "styled-components";
 
 import Header from './components/headerComponents/Header'
 import Feed from './components/feedComponents/Feed'
@@ -97,8 +98,21 @@ class App extends Component {
     const { itemTypes, selectedListing, items, selectedItemType, isLoading } = this.state
     const { toggleListingType, handleClick } = this
 
+    const GlobalStyles = createGlobalStyle`
+        @import url('https://fonts.googleapis.com/css?family=Nunito|Titillium+Web&display=swap');
+      
+      span, button {
+        font-family: 'Nunito', sans-serif;
+      }
+
+      h1, h2, h3, p {
+        font-family: 'Titillium Web', sans-serif;
+      }
+    `
+
     return (
       <div className="App">
+        <GlobalStyles />
         <Header data={{
           handleClick,
           itemTypes,
