@@ -8,10 +8,11 @@ const Feed = props => {
     const { items, isLoading, selectedItemType } = props.data
 
     const FeedContainer = styled.div`
-        width: 100vw;
+        width: calc(100vw - 51px);
         display: flex;
         flex-wrap: wrap;
-        padding: 30px 10px 70px;
+        padding: 30px 0 70px;
+        margin-left: 35px;
 
         ${isLoading && css`
             justify-content: center;

@@ -26,8 +26,9 @@ class App extends Component {
   }
 
   toggleListingType () {
+    const { selectedListing } = this.state
     this.setState({
-      selectedListing: this.state.selectedListing === 'top' ? 'recent' : 'top'
+      selectedListing: selectedListing === 'top' ? 'recent' : 'top'
     })
   }
 
@@ -37,9 +38,10 @@ class App extends Component {
   }
 
   getTopItemIds () {
-    return axios.get(this.state.baseUrl + 'v0/topstories.json')
+    const { baseUrl } = this.state
+    return axios.get(baseUrl + 'v0/topstories.json')
       .then(topData => {
-        return axios.get(this.state.baseUrl + 'v0/jobstories.json')
+        return axios.get(baseUrl + 'v0/jobstories.json')
           .then(jobData => topData.data.concat(jobData.data))
       })
       .catch(error => console.log('topItemIds', error))
@@ -58,19 +60,22 @@ class App extends Component {
   }
 
   getRecentItemIds () {
-    return axios.get(this.state.baseUrl + 'v0/maxitem.json')
+    const { baseUrl } = this.state
+    return axios.get(baseUrl + 'v0/maxitem.json')
       .then(data => this.generateRecentIds(data.data))
       .catch(error => console.log('recentItemIds', error))
   }
 
   setItemsInState () {
-    const getIds =  this.state.selectedListing === 'top' ? this.getTopItemIds : this.getRecentItemIds
+    const { getTopItemIds, getRecentItemIds, state } = this
+    const { selectedListing, baseUrl } = state
+    const getIds =  selectedListing === 'top' ? getTopItemIds : getRecentItemIds
     return this.setState({
       isLoading: true
     }, () => {
       return getIds()  
       .then(ids => {
-        const itemRequests = ids.map(id => axios.get(`${this.state.baseUrl}/v0/item/${id}/.json`))
+        const itemRequests = ids.map(id => axios.get(`${baseUrl}/v0/item/${id}/.json`))
         return Promise.all(itemRequests)
       })
       .then(items => {
@@ -91,7 +96,7 @@ class App extends Component {
     const { selectedListing: prevListing } = prevState
     const { selectedListing } = this.state
     const shouldGetItems = prevListing !== selectedListing
-    return shouldGetItems ? this.setItemsInState() : undefined
+    return shouldGetItems && this.setItemsInState()
   }
 
   render() {

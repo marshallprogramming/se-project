@@ -12,6 +12,7 @@ const Header = props => {
         background-color: #333;
         position: fixed;
         top: 0;
+        z-index: 10;
     `
 
     return (

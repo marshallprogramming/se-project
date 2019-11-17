@@ -7,6 +7,7 @@ const FooterContainer = styled.div`
     background-color: #333;
     position: fixed;
     bottom: 0;
+    z-index: 10;
 `
 
 const Footer = () => {
