@@ -10,6 +10,7 @@ const Toggle = props => {
         border-radius: 2px;
         height: 42px;
         width: 128px;
+        cursor: pointer;
     `
 
     const Span = styled.span`

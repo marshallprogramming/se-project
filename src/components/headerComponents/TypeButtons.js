@@ -7,6 +7,7 @@ const TypeButtons = props => {
     const { handleClick, itemTypes, selectedItemType } = props.data
     const Container = styled.div`
         display: flex;
+        flex-wrap: wrap;
     `
 
     return (

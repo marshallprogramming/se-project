@@ -13,6 +13,7 @@ const Button = props => {
         margin-right: 10px;
         color: #f7f7f7;
         font-size: 16px;
+        cursor: pointer;
     `
 
     return (
