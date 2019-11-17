@@ -13,13 +13,15 @@ class App extends Component {
       selectedItemType: 'story',
       items: [],
       baseUrl: 'https://hacker-news.firebaseio.com/',
-      selectedListing: 'top'
+      selectedListing: 'top',
+      isLoading: false
     }
 
     this.handleClick = this.handleClick.bind(this)
     this.getTopItemIds = this.getTopItemIds.bind(this)
     this.getRecentItemIds = this.getRecentItemIds.bind(this)
     this.toggleListingType = this.toggleListingType.bind(this)
+    this.setItemsInState = this.setItemsInState.bind(this)
   }
 
   toggleListingType () {
@@ -62,16 +64,22 @@ class App extends Component {
 
   setItemsInState () {
     const getIds =  this.state.selectedListing === 'top' ? this.getTopItemIds : this.getRecentItemIds
-    return getIds()  
+    return this.setState({
+      isLoading: true
+    }, () => {
+      return getIds()  
       .then(ids => {
         const itemRequests = ids.map(id => axios.get(`${this.state.baseUrl}/v0/item/${id}/.json`))
         return Promise.all(itemRequests)
       })
-      .then(items => items.filter(item => item.data && item.data.type === this.state.selectedItemType))
       .then(items => {
-        this.setState({ items: items && items.length ? items : [] })
+        this.setState({
+          items: items && items.length ? items : [],
+          isLoading: false
+        })
       })
       .catch(error => console.log('Set items in state', error))
+    })
   }
 
   componentDidMount () {
@@ -79,14 +87,14 @@ class App extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const { selectedListing: prevListing, selectedItemType: prevType } = prevState
-    const { selectedListing, selectedItemType } = this.state
-    const shouldGetItems = prevListing !== selectedListing || prevType !== selectedItemType
+    const { selectedListing: prevListing } = prevState
+    const { selectedListing } = this.state
+    const shouldGetItems = prevListing !== selectedListing
     return shouldGetItems ? this.setItemsInState() : undefined
   }
 
   render() {
-    const { itemTypes, selectedListing, items, selectedItemType } = this.state
+    const { itemTypes, selectedListing, items, selectedItemType, isLoading } = this.state
     const { toggleListingType, handleClick } = this
 
     return (
@@ -98,7 +106,11 @@ class App extends Component {
           selectedItemType,
           selectedListing
         }}/>
-        <Feed items={ items } />
+        <Feed data={{
+          items,
+          isLoading,
+          selectedItemType
+        }} />
         <Footer />
       </div>
     )

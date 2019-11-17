@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import FeedItem from './FeedItem'
+import ItemsContainer from './ItemsContainer'
+import LoadingAnimation from '../headerComponents/LoadingAnimation'
 
 const FeedContainer = styled.div`
     max-width: 100vw;
@@ -11,10 +12,13 @@ const FeedContainer = styled.div`
 `
 
 const Feed = props => {
-    const { items } = props
+    const { items, isLoading, selectedItemType } = props.data
     return (
         <FeedContainer>
-            {items.map((item, index) => <FeedItem key={index} itemData={item} />)}
+           {isLoading
+            ? <LoadingAnimation />
+            : <ItemsContainer data={{ items, selectedItemType }} />
+            }
         </FeedContainer>
     )
 }
