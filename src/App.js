@@ -99,8 +99,12 @@ class App extends Component {
     const { toggleListingType, handleClick } = this
 
     const GlobalStyles = createGlobalStyle`
-        @import url('https://fonts.googleapis.com/css?family=Nunito|Titillium+Web&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Nunito|Titillium+Web&display=swap');
       
+      body {
+        background: #f7f7f7;
+      }
+
       span, button {
         font-family: 'Nunito', sans-serif;
       }

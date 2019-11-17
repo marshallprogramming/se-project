@@ -1,24 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Feed = props => {
+import UpvoteButton from './UpvoteButton'
+import ItemInfo from './ItemInfo'
+
+const FeedItem = props => {
     const { itemData } = props
     const { data } = itemData
-    const { title, by, score, url } = data
 
     const Item = styled.div`
+        display: grid;
+        grid-template-columns: 2fr 5fr;
         width: 140px;
-        margin-left: 20px;
+        height: 180px;
+        border: 1px solid #333;
+        border-radius: 2px;
+        margin: 5px;
     `
+
 
     return (
         <Item>
-            <a href={url}>
-                <h3>{title}</h3>
-            </a>
-            <h5>By {by}</h5>
+            <UpvoteButton itemData={data} />
+            <ItemInfo itemData={data} />
         </Item>
     )
 }
 
-export default Feed
+export default FeedItem

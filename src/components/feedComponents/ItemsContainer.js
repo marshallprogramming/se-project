@@ -8,10 +8,11 @@ const ItemsContainer = props => {
     const filteredItems = items.filter(item => item.data && item.data.type === selectedItemType)
 
     const ItemsWrapper = styled.div`
-        max-width: 100vw;
+        width: 100vw;
         display: flex;
         flex-wrap: wrap;
-        padding: 80px 10px 100px;
+        padding: 80px 0 100px;
+        justify-content: flex-start;
     `
 
     const NoItemsMessage = styled.h3`

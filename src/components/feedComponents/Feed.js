@@ -8,7 +8,7 @@ const Feed = props => {
     const { items, isLoading, selectedItemType } = props.data
 
     const FeedContainer = styled.div`
-        max-width: 100vw;
+        width: 100vw;
         display: flex;
         flex-wrap: wrap;
         padding: 30px 10px 70px;

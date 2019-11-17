@@ -9,6 +9,7 @@ const Buttons = props => {
     const ButtonsContainer = styled.div`
         display: flex;
         justify-content: space-between;
+        align-items: flex-end;
     `
     return (
         <ButtonsContainer>
